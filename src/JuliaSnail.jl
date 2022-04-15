@@ -11,52 +11,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import Pkg
-
-
 module JuliaSnail
-
-
-# XXX: External dependency hack. Snail's own dependencies need to be listed
-# first in LOAD_PATH during initial load, otherwise conflicting versions
-# installed in the Julia global environment cause conflicts. Especially
-# CSTParser, with its unstable API. However, Snail should not be listed first
-# the rest of the time.
-macro with_pkg_env(dir, action)
-   :(
-   try
-      insert!(LOAD_PATH, 1, $dir)
-      $action
-   catch err
-      if isa(err, ArgumentError)
-         if isfile(joinpath($dir, "Project.toml"))
-            # force dependency installation
-            Main.Pkg.activate($dir)
-            Main.Pkg.instantiate()
-            Main.Pkg.precompile()
-            # activate what was the first entry before Snail was pushed to the head of LOAD_PATH
-            Main.Pkg.activate(LOAD_PATH[2])
-         end
-      end
-   finally
-      # Remove Snail from the head of the LOAD_PATH and put it at the tail. At this
-      # point, all of its own dependencies should be loaded and the user's
-      # preferred project should be active.
-      deleteat!(LOAD_PATH, 1)
-      if isfile(joinpath($dir, "Project.toml"))
-         push!(LOAD_PATH, $dir)
-      end
-   end
-   )
-end
-
-@with_pkg_env (@__DIR__) begin
-   # list all external dependency imports here (from the appropriate Project.toml, either Snail's or an extension's):
-   import CSTParser
-   # check for dependency API compatibility
-   !isdefined(CSTParser, :iscall) &&
-     throw(ArgumentError("CSTParser API not compatible, must install Snail-specific version"))
-end
 
 
 import Markdown
