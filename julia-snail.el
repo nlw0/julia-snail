@@ -457,7 +457,7 @@ Returns nil if the poll timed out, t otherwise."
     (cond
      ;; local REPL
      ((equal nil remote-method)
-      (format "%s %s -L %s" julia-snail-executable extra-args julia-snail--server-file))
+      (format "%s %s" julia-snail-executable extra-args)) ; julia-snail--server-file))
      ;; remote REPL
      ((string-equal "ssh" remote-method)
       (format "ssh -t -L %1$s:localhost:%2$s %3$s %4$s %5$s -L %6$s"

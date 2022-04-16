@@ -1,4 +1,5 @@
 name = "JuliaSnail"
+authors = ["gcv <gepardcv@gmail.com>"]
 uuid = "b7bacaaa-4034-4336-918a-e9e3c408e0b3"
 
 [deps]
