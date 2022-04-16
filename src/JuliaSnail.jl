@@ -11,11 +11,10 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import Pkg
-
 
 module JuliaSnail
 
+# import Pkg
 
 # XXX: External dependency hack. Snail's own dependencies need to be listed
 # first in LOAD_PATH during initial load, otherwise conflicting versions

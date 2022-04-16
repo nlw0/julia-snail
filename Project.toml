@@ -1,2 +1,10 @@
+name = "JuliaSnail"
+uuid = "b7bacaaa-4034-4336-918a-e9e3c408e0b3"
+
 [deps]
+Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 CSTParser = "00ebfdb7-1f24-5e51-bd34-a7502290713f"
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+Sockets = "6462fe0b-24de-5631-8697-dd941f90decc"
